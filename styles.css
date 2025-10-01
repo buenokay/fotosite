@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --olive:#6B8E23;         /* oliva principal */
+  --olive-dark:#556B2F;    /* oliva escuro */
+  --olive-darker:#2F3A15;  /* oliva bem escuro */
+  --sand:#EFEAD8;          /* areia clara para contrastes */
+  --cream:#F7F6EF;         /* creme para cartões */
+  --ink:#10120D;           /* texto escuro */
+  --leaf:#8BAE3C;          /* verde folha para destaques */
+  --mint:#DBE7B5;          /* verde claro sutil */
+}
+
+*{ font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+/* Scroll suave e barras discretas em mobile */
+html{ scroll-behavior:smooth; }
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.15); border-radius:999px; }
+
+/* Toque amigável */
+button, a, input{ -webkit-tap-highlight-color: transparent; }
+
+/* Sombra suave de cartões */
+.soft-shadow{ box-shadow: 0 8px 24px rgba(16,18,13,0.18); }
+
+/* Animações */
+@keyframes pop {
+  0%{ transform: scale(.98); opacity:.7; }
+  100%{ transform: scale(1); opacity:1; }
+}
+.pop{ animation: pop .18s ease-out; }
+
+/* Estilos para chips */
+.chip {
+  @apply px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition border border-white/15 bg-white/15 text-white;
+}
+
+.chip.active {
+  @apply bg-[var(--sand)] text-[var(--ink)];
+}
+
+/* Estilos para tabs */
+.tab-btn {
+  @apply text-center px-3 py-2.5 rounded-lg font-medium transition;
+}
+
+.tab-btn.active {
+  @apply bg-white text-[var(--ink)] shadow;
+}
+
+/* Estilos para botões de sugestão */
+.suggest {
+  @apply px-3 py-1.5 rounded-full bg-[var(--mint)] text-xs font-medium;
+}
+
+/* Estilos para botões de ação */
+.btn-detalhes, .btn-orcamento, .btn-copiar {
+  @apply px-3 py-1.5 rounded-xl font-semibold transition;
+}
+
+.btn-detalhes {
+  @apply bg-[var(--leaf)] text-white hover:bg-[var(--olive-dark)];
+}
+
+.btn-orcamento {
+  @apply bg-[var(--olive-dark)] text-white hover:bg-[var(--olive-darker)];
+}
+
+.btn-copiar {
+  @apply bg-[var(--leaf)] text-white hover:bg-[var(--olive-dark)];
+}
+
+.btn-favoritar {
+  @apply px-2.5 py-1.5 rounded-xl bg-white border border-black/10 hover:bg-[var(--sand)] transition;
+}
+
+.btn-aplicar {
+  @apply text-xs px-3 py-1.5 rounded-lg bg-white border border-black/10 hover:bg-[var(--sand)] transition;
+}
