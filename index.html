@@ -1,164 +1,437 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Protótipo Fotografia • Verde Oliva</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Ver - Fotografia</title>
+    <style>
+        /* Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Cores */
+        :root {
+            --verde-oliva: #556B2F;
+            --verde-oliva-claro: #6B8E23;
+            --branco: #ffffff;
+            --cinza-claro: #f5f5f5;
+        }
+        
+        /* Cabeçalho */
+        header {
+            background-color: var(--verde-oliva);
+            color: var(--branco);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Seção Hero */
+        .hero {
+            background: linear-gradient(rgba(85, 107, 47, 0.7), rgba(85, 107, 47, 0.7)), url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--branco);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--verde-oliva);
+            color: var(--branco);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--verde-oliva);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--branco);
+        }
+        
+        /* Seções */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--verde-oliva);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--verde-oliva);
+            margin: 15px auto;
+        }
+        
+        /* Portfólio */
+        .portfolio {
+            background-color: var(--cinza-claro);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .portfolio-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Ideias */
+        .ideias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .ideia-card {
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .ideia-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ideia-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .ideia-content {
+            padding: 20px;
+        }
+        
+        .ideia-content h3 {
+            color: var(--verde-oliva);
+            margin-bottom: 10px;
+        }
+        
+        /* Locais */
+        .locais {
+            background-color: var(--cinza-claro);
+        }
+        
+        .locais-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .local-card {
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .local-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .local-content {
+            padding: 20px;
+        }
+        
+        .local-content h3 {
+            color: var(--verde-oliva);
+            margin-bottom: 10px;
+        }
+        
+        /* Contato */
+        .contato {
+            text-align: center;
+            background-color: var(--verde-oliva);
+            color: var(--branco);
+            padding: 60px 0;
+        }
+        
+        .contato h2 {
+            margin-bottom: 20px;
+        }
+        
+        .telefone {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 20px 0;
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 50px;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: var(--branco);
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .telefone {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-[#6B8E23] text-[var(--ink)]">
-  <!-- Wrapper mobile -->
-  <div class="mx-auto max-w-sm min-h-screen bg-[var(--olive)] relative flex flex-col" style="box-shadow:0 20px 60px rgba(0,0,0,.3);">
-
-    <!-- Top bar -->
-    <header class="sticky top-0 z-30 px-5 pt-6 pb-4 bg-gradient-to-b from-[var(--olive-dark)] to-[var(--olive)] text-white">
-      <div class="flex items-center justify-between">
-        <h1 class="text-xl font-semibold tracking-tight">Estúdio Oliva</h1>
-        <span class="text-xs bg-white/15 px-2.5 py-1 rounded-full">Protótipo</span>
-      </div>
-      <p class="text-white/80 text-sm mt-2">Fotografia com estética natural e tons terrosos.</p>
-
-      <!-- Tabs -->
-      <div class="mt-5 grid grid-cols-2 bg-white/10 rounded-xl p-1">
-        <button id="tabPortfolio" class="tab-btn active text-center px-3 py-2.5 rounded-lg font-medium transition pop">Portfólio</button>
-        <button id="tabIdeias" class="tab-btn text-center px-3 py-2.5 rounded-lg font-medium transition">Ideias</button>
-      </div>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Meu Ver</div>
+            <nav>
+                <ul>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#ideias">Ideias</a></li>
+                    <li><a href="#locais">Locais</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Conteúdo -->
-    <main class="flex-1 relative">
-      <!-- Portfólio -->
-      <section id="sectionPortfolio" class="pt-4 pb-28">
-        <!-- Banner promocional -->
-        <div class="px-5">
-          <div id="promoBanner" class="relative overflow-hidden rounded-2xl p-4 bg-gradient-to-r from-[var(--olive-dark)] to-[var(--leaf)] text-white soft-shadow">
-            <div class="flex items-start gap-3">
-              <div class="shrink-0 w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <rect x="3" y="7" width="18" height="12" rx="2" stroke="white" stroke-width="1.8"/>
-                  <rect x="7" y="4" width="6" height="4" rx="1" stroke="white" stroke-width="1.8"/>
-                  <circle cx="12" cy="13" r="3.2" stroke="white" stroke-width="1.8"/>
-                </svg>
-              </div>
-              <div class="flex-1">
-                <p class="text-[10px] uppercase tracking-wider text-white/80">Oferta</p>
-                <h2 class="text-lg font-semibold leading-snug">Ensaio em verde oliva</h2>
-                <p class="text-sm text-white/90 mt-1">Pacotes a partir de R$ 300 nesta semana.</p>
-                <div class="mt-3 flex items-center gap-2">
-                  <button id="bannerCTA" class="px-3 py-1.5 rounded-lg bg-white text-[var(--olive-dark)] font-semibold hover:bg-[var(--sand)] transition">Ver pacotes</button>
-                  <button id="bannerClose" class="px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 transition">Fechar</button>
+    <!-- Seção Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Capturando Momentos Únicos</h1>
+            <p>Fotografia profissional para eternizar suas memórias mais especiais</p>
+            <a href="#contato" class="btn">Agendar Sessão</a>
+        </div>
+    </section>
+
+    <!-- Seção Portfólio -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Meu Trabalho</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografia de casamento">
                 </div>
-              </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografia de família">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Retrato feminino">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografia de paisagem">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Retrato artístico">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografia de evento">
+                </div>
             </div>
-            <svg class="absolute -right-6 -bottom-6 opacity-20" width="160" height="160" viewBox="0 0 200 200" fill="none" aria-hidden="true">
-              <circle cx="100" cy="100" r="90" stroke="white" stroke-width="8"/>
-              <path d="M70 120 L100 80 L130 120 Z" fill="white"/>
-            </svg>
-          </div>
         </div>
+    </section>
 
-        <!-- Filtros rápidos -->
-        <div class="px-5 mt-4">
-          <div class="flex gap-2 overflow-x-auto pb-1">
-            <button data-filter="tudo" class="chip active">Tudo</button>
-            <button data-filter="retrato" class="chip">Retrato</button>
-            <button data-filter="produto" class="chip">Produto</button>
-            <button data-filter="casal" class="chip">Casal</button>
-            <button data-filter="lifestyle" class="chip">Lifestyle</button>
-          </div>
-        </div>
-
-        <!-- Grid de cartões -->
-        <div id="gridPortfolio" class="mt-4 grid grid-cols-1 gap-4 px-5">
-          <!-- Cartões são gerados via JS para facilitar o filtro -->
-        </div>
-      </section>
-
-      <!-- Ideias -->
-      <section id="sectionIdeias" class="hidden pt-4 pb-28">
-        <div class="px-5 space-y-4">
-          <!-- Busca -->
-          <div class="bg-[var(--cream)]/95 rounded-2xl p-3 soft-shadow">
-            <div class="flex items-center gap-2 px-2 py-1.5 bg-white rounded-xl border border-black/5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <circle cx="11" cy="11" r="7" stroke="#6B8E23" stroke-width="2"/>
-                <path d="M20 20L17 17" stroke="#6B8E23" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <input id="searchIdeas" type="text" placeholder="Busque por tema, luz, estilo..."
-                     class="w-full outline-none text-sm placeholder-black/40 py-2 bg-transparent" />
-              <button id="clearSearch" class="text-xs text-white bg-[var(--leaf)] hover:bg-[var(--olive)] transition px-3 py-1.5 rounded-lg">Limpar</button>
+    <!-- Seção Ideias -->
+    <section id="ideias">
+        <div class="container">
+            <h2 class="section-title">Ideias para Sua Sessão</h2>
+            <div class="ideias-grid">
+                <div class="ideia-card">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sessão urbana">
+                    <div class="ideia-content">
+                        <h3>Urbano</h3>
+                        <p>Fotos em cenários urbanos, explorando arquitetura e ruas da cidade.</p>
+                    </div>
+                </div>
+                <div class="ideia-card">
+                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sessão vintage">
+                    <div class="ideia-content">
+                        <h3>Vintage</h3>
+                        <p>Estilo retrô com elementos nostálgicos e edição com tons sépia.</p>
+                    </div>
+                </div>
+                <div class="ideia-card">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sessão noturna">
+                    <div class="ideia-content">
+                        <h3>Noturno</h3>
+                        <p>Fotos à noite com iluminação criativa e efeitos de luz.</p>
+                    </div>
+                </div>
+                <div class="ideia-card">
+                    <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sessão minimalista">
+                    <div class="ideia-content">
+                        <h3>Minimalista</h3>
+                        <p>Foco no essencial com composições limpas e cores neutras.</p>
+                    </div>
+                </div>
             </div>
-            <!-- Sugestões rápidas -->
-            <div class="mt-3 flex flex-wrap gap-2">
-              <button class="suggest px-3 py-1.5 rounded-full bg-[var(--mint)] text-xs font-medium">luz natural</button>
-              <button class="suggest px-3 py-1.5 rounded-full bg-[var(--mint)] text-xs font-medium">golden hour</button>
-              <button class="suggest px-3 py-1.5 rounded-full bg-[var(--mint)] text-xs font-medium">fundo minimalista</button>
-              <button class="suggest px-3 py-1.5 rounded-full bg-[var(--mint)] text-xs font-medium">tons terrosos</button>
+        </div>
+    </section>
+
+    <!-- Seção Locais -->
+    <section id="locais" class="locais">
+        <div class="container">
+            <h2 class="section-title">Locais para Sessões</h2>
+            <div class="locais-grid">
+                <div class="local-card">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Campo">
+                    <div class="local-content">
+                        <h3>Campos Abertos</h3>
+                        <p>Amplos espaços naturais com paisagens deslumbrantes e luz natural abundante.</p>
+                    </div>
+                </div>
+                <div class="local-card">
+                    <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Jardim">
+                    <div class="local-content">
+                        <h3>Jardins Botânicos</h3>
+                        <p>Ambientes floridos e bem cuidados, perfeitos para sessões românticas e familiares.</p>
+                    </div>
+                </div>
+                <div class="local-card">
+                    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Floresta">
+                    <div class="local-content">
+                        <h3>Florestas</h3>
+                        <p>Cenários mágicos com jogos de luz e sombra entre as árvores.</p>
+                    </div>
+                </div>
+                <div class="local-card">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Praia">
+                    <div class="local-content">
+                        <h3>Praias</h3>
+                        <p>Cenários à beira-mar com luz dourada do pôr do sol e paisagens marinhas.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <!-- Lista de ideias -->
-          <div id="listIdeias" class="space-y-3">
-            <!-- Itens gerados via JS -->
-          </div>
         </div>
-      </section>
-    </main>
+    </section>
 
-    <!-- Barra inferior com ação -->
-    <footer class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-sm bg-gradient-to-t from-[var(--olive-dark)] to-[var(--olive)] p-4">
-      <div class="bg-white/10 border border-white/15 rounded-2xl px-4 py-3 flex items-center gap-3">
-        <div class="flex-1">
-          <p class="text-white/90 text-sm font-medium">Quer um orçamento?</p>
-          <p class="text-white/70 text-xs">Selecione um trabalho e toque em "Detalhes".</p>
+    <!-- Seção Contato -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <p>Agende sua sessão fotográfica ou tire suas dúvidas</p>
+            <div class="telefone">(11) 98765-4321</div>
+            <p>Ou nos envie uma mensagem pelas redes sociais</p>
         </div>
-        <button id="btnContato" class="px-4 py-2 rounded-xl font-semibold text-[var(--olive)] bg-[var(--sand)] hover:bg-white transition">Contato</button>
-      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Meu Ver Fotografia. Todos os direitos reservados.</p>
+        </div>
     </footer>
-
-    <!-- Modal Detalhes -->
-    <div id="modal" class="hidden fixed inset-0 z-50">
-      <div class="absolute inset-0 bg-black/50"></div>
-      <div class="absolute inset-x-0 bottom-0 bg-[var(--cream)] rounded-t-3xl p-5 soft-shadow max-h-[85vh] overflow-hidden">
-        <div class="flex items-start justify-between gap-3">
-          <div>
-            <h3 id="modalTitle" class="text-lg font-semibold"></h3>
-            <p id="modalTag" class="text-xs mt-0.5 text-black/60"></p>
-          </div>
-          <button id="modalClose" class="text-[var(--cream)] bg-[var(--olive-dark)] hover:bg-[var(--olive-darker)] rounded-xl px-3 py-1.5 text-sm">Fechar</button>
-        </div>
-
-        <div class="mt-4 rounded-2xl overflow-hidden border border-black/5">
-          <!-- Placeholder maior de "foto" -->
-          <div id="modalArt" class="w-full aspect-[4/3] bg-[var(--mint)] flex items-center justify-center">
-            <!-- SVG injetado -->
-          </div>
-          <div class="bg-white px-4 py-3 flex items-center justify-between">
-            <div>
-              <p class="text-sm text-black/60">A partir de</p>
-              <p id="modalPrice" class="text-lg font-semibold text-[var(--olive-dark)]"></p>
-            </div>
-            <button id="btnOrcamento" class="px-4 py-2 rounded-xl font-semibold text-white bg-[var(--olive-dark)] hover:bg-[var(--olive-darker)] transition">
-              Solicitar orçamento
-            </button>
-          </div>
-        </div>
-
-        <div class="mt-4 grid grid-cols-2 gap-2">
-          <button id="btnVerMais" class="text-sm px-3 py-2 rounded-xl bg-white border border-black/5 hover:bg-[var(--sand)] transition">Ver mais como este</button>
-          <button id="btnCopiarBrief" class="text-sm px-3 py-2 rounded-xl bg-[var(--leaf)] text-white hover:bg-[var(--olive-dark)] transition">Copiar brief</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Toast simples -->
-    <div id="toast" class="pointer-events-none fixed left-1/2 -translate-x-1/2 bottom-24 z-[60] hidden">
-      <div class="bg-[var(--ink)] text-white text-sm px-4 py-2 rounded-full shadow-lg">Copiado!</div>
-    </div>
-
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
